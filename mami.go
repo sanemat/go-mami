@@ -2,13 +2,23 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"time"
 )
 
-func mami() string {
-	return "foo/123.txt"
+// basename = time.strftime('%Y-%m-%d-%H-%M-%S')
+const timeFormat = "2006-01-02-15-04-05"
+
+func mami(current time.Time) (string, error) {
+	baseName := current.Format(timeFormat)
+	return "foo/" + baseName + ".txt", nil
 }
 
 func main() {
-	output := mami()
-	fmt.Println(output)
+	current := time.Now()
+	if output, err := mami(current); err != nil {
+		log.Fatal(err)
+	} else {
+		fmt.Println(output)
+	}
 }
