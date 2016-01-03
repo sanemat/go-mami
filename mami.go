@@ -12,8 +12,8 @@ import (
 // memo: basename = time.strftime('%Y-%m-%d-%H-%M-%S')
 const timeFormat = "2006-01-02-15-04-05"
 
-// ErrDirectory is the error resulting if no directory given
-var ErrDirectory = errors.New("mami requires MAMI_DIR or directory option")
+// ErrDir is the error resulting if no directory given
+var ErrDir = errors.New("mami requires MAMI_DIR or directory option")
 
 var givenDir = flag.String("d", "", "target directory")
 
@@ -27,7 +27,7 @@ func mami(current time.Time, givenDir string) (string, error) {
 		targetDir = os.Getenv("MAMI_DIR")
 	}
 	if targetDir == "" {
-		return "", ErrDirectory
+		return "", ErrDir
 	}
 
 	// trim directory separator
