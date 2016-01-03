@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// basename = time.strftime('%Y-%m-%d-%H-%M-%S')
+// memo: basename = time.strftime('%Y-%m-%d-%H-%M-%S')
 const timeFormat = "2006-01-02-15-04-05"
 
 var givenDir = flag.String("d", "", "target directory")
