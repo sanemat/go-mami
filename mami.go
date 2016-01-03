@@ -23,11 +23,17 @@ func mami(current time.Time, givenDir string) (string, error) {
 	if givenDir != "" {
 		targetDir = givenDir
 	} else {
+		// NOTE: add document about MAMI_DIR
 		targetDir = os.Getenv("MAMI_DIR")
 	}
 	if targetDir == "" {
 		return "", ErrDirectory
 	}
+
+	// trim directory separator
+
+	// path join
+
 	return targetDir + baseName + ".txt", nil
 }
 
