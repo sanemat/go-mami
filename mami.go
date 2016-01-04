@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -30,11 +31,7 @@ func mami(current time.Time, givenDir string) (string, error) {
 		return "", ErrDir
 	}
 
-	// trim directory separator
-
-	// path join
-
-	return targetDir + baseName + ".txt", nil
+	return filepath.Join(targetDir, baseName+".txt"), nil
 }
 
 func main() {
