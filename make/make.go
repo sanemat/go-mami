@@ -25,10 +25,31 @@ func buildCommand(fileName string, commandName string) (string, error) {
 }
 
 func buildMami() {
-	if out, err := buildCommand("mami.go", "mami"); err != nil {
+	if out, err := buildCommand(filepath.Join("cmd", "mami", "mami.go"), "mami"); err != nil {
 		log.Fatal(err)
 	} else {
 		fmt.Println(out)
+	}
+}
+
+func exists(filename string) bool {
+	_, err := os.Stat(filename)
+	return err == nil
+}
+
+func clean() {
+	files := []string{
+		filepath.Join("out", "mami.exe"),
+		filepath.Join("out", "mami"),
+	}
+	for _, name := range files {
+		if exists(name) {
+			if err := os.Remove(name); err != nil {
+				log.Fatal(err)
+			} else {
+				fmt.Println("rm " + name)
+			}
+		}
 	}
 }
 
@@ -99,6 +120,8 @@ func main() {
 	switch action {
 	case "build":
 		buildMami()
+	case "clean":
+		clean()
 	case "fmt":
 		fmtAll()
 	case "beforescript":
