@@ -32,6 +32,27 @@ func buildMami() {
 	}
 }
 
+func exists(filename string) bool {
+	_, err := os.Stat(filename)
+	return err == nil
+}
+
+func clean() {
+	files := []string{
+		filepath.Join("out", "mami.exe"),
+		filepath.Join("out", "mami"),
+	}
+	for _, name := range files {
+		if exists(name) {
+			if err := os.Remove(name); err != nil {
+				log.Fatal(err)
+			} else {
+				fmt.Println("rm " + name)
+			}
+		}
+	}
+}
+
 func fmtAll() {
 	comm := []string{"go", "fmt", "./..."}
 	if out, err := exec.Command(comm[0], comm[1:]...).Output(); err != nil {
@@ -99,6 +120,8 @@ func main() {
 	switch action {
 	case "build":
 		buildMami()
+	case "clean":
+		clean()
 	case "fmt":
 		fmtAll()
 	case "beforescript":
