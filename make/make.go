@@ -25,7 +25,7 @@ func buildCommand(fileName string, commandName string) (string, error) {
 }
 
 func buildMami() {
-	if out, err := buildCommand("mami.go", "mami"); err != nil {
+	if out, err := buildCommand(filepath.Join("cmd", "mami", "mami.go"), "mami"); err != nil {
 		log.Fatal(err)
 	} else {
 		fmt.Println(out)
