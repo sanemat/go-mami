@@ -10,15 +10,15 @@ import (
 	"time"
 )
 
-// memo: basename = time.strftime('%Y-%m-%d-%H-%M-%S')
-const timeFormat = "2006-01-02-15-04-05"
 
-// ErrDir is the error resulting if no directory given
-var ErrDir = errors.New("mami requires MAMI_DIR or directory option")
-
-var givenDir = flag.String("d", "", "target directory")
 
 func mami(current time.Time, givenDir string) (string, error) {
+	// memo: basename = time.strftime('%Y-%m-%d-%H-%M-%S')
+	const timeFormat = "2006-01-02-15-04-05"
+
+	// ErrDir is the error resulting if no directory given
+	ErrDir := errors.New("mami requires MAMI_DIR or directory option")
+
 	baseName := current.Format(timeFormat)
 	var targetDir string
 	if givenDir != "" {
@@ -35,6 +35,8 @@ func mami(current time.Time, givenDir string) (string, error) {
 }
 
 func main() {
+	givenDir := flag.String("d", "", "target directory")
+
 	flag.Parse()
 	current := time.Now()
 	if output, err := mami(current, *givenDir); err != nil {
