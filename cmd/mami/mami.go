@@ -10,7 +10,8 @@ import (
 	"time"
 )
 
-
+// Version of mami
+const Version = "0.1.0"
 
 func mami(current time.Time, givenDir string) (string, error) {
 	// memo: basename = time.strftime('%Y-%m-%d-%H-%M-%S')
@@ -36,8 +37,13 @@ func mami(current time.Time, givenDir string) (string, error) {
 
 func main() {
 	givenDir := flag.String("d", "", "target directory")
+	showVersion := flag.Bool("v", false, "show version")
 
 	flag.Parse()
+	if *showVersion {
+		fmt.Println(Version)
+		os.Exit(0)
+	}
 	current := time.Now()
 	if output, err := mami(current, *givenDir); err != nil {
 		log.Fatal(err)
