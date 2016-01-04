@@ -2,8 +2,8 @@ language: go
 go:
   - 1.5
 install:
-  - go run make.go build
+  - go run make/make.go build
 before_script:
-  - go run make.go beforescript
+  - go run make/make.go beforescript
 script:
-  - go run make.go script
+  - go run make/make.go script
